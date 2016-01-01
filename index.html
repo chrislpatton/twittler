@@ -9,32 +9,37 @@
   </head>
   <body>
     <header class ="title">Twittler</header>
-    <div class='stream-area'>
+    <div class='stream-area'><button class ="btn">Refresh</button>
       <div class="twitts"></div>
       
     </div>
     <script>
 
       $(document).ready(function(){
-         var $twitts = $('.twitts');
+        var $twitts = $('.twitts');
         var tweetGenerator = function() {
-          
-         $twitts.html('');
-          var index = streams.home.length - 1;
-          while(index >= 0){
+        $twitts.html('');
+        var index = streams.home.length - 1;
+        while(index >= 0){
             var tweet = streams.home[index];
             var $tweet = $('<div class="tweet_content"><div class="' + tweet.user + '"></div><span class="tweet_time"></span><div class="tweet_msg"></div></div>');
-    $tweet.find('.' + tweet.user).text('@' + tweet.user);
-    $tweet.find('.tweet_time').text(tweet.created_at);
-    $tweet.find('.tweet_msg').text(tweet.message);
-
+            $tweet.find('.' + tweet.user).text('@' + tweet.user);
+            $tweet.find('.tweet_time').text(tweet.created_at);
+            $tweet.find('.tweet_msg').text(tweet.message);
             $tweet.appendTo($twitts);
             index -= 1;
           }
         }
+        
         tweetGenerator();
-       var timer = setInterval(tweetGenerator, 5000);
+        var timer = setInterval(tweetGenerator, 5000);
 
+       
+/*
+================================================================
+Functions to allow user to click on individual streams
+================================================================
+*/
        $(document).on('click','.shawndrost', function(){
           $twitts.html('');
           clearInterval(timer);
@@ -42,11 +47,10 @@
           while (index >= 0) {
             var tweet = streams.users.shawndrost[index]
             var $tweet = $('<div class="tweet_content"><div class="' + tweet.user + '"></div><span class="tweet_time"></span><div class="tweet_msg"></div></div>');
-    $tweet.find('.' + tweet.user).text('@shawndrost');
-    $tweet.find('.tweet_time').text(tweet.created_at);
-    $tweet.find('.tweet_msg').text(tweet.message);
-
-            $tweet.prependTo($twitts);
+            $tweet.find('.' + tweet.user).text('@shawndrost');
+            $tweet.find('.tweet_time').text(tweet.created_at);
+            $tweet.find('.tweet_msg').text(tweet.message);
+            $tweet.appendTo($twitts);
             index -= 1;
           }
           
@@ -61,11 +65,10 @@
           while (index >= 0) {
             var tweet = streams.users.sharksforcheap[index]
             var $tweet = $('<div class="tweet_content"><div class="' + tweet.user + '"></div><span class="tweet_time"></span><div class="tweet_msg"></div></div>');
-    $tweet.find('.' + tweet.user).text('@sharksforcheap');
-    $tweet.find('.tweet_time').text(tweet.created_at);
-    $tweet.find('.tweet_msg').text(tweet.message);
-
-            $tweet.prependTo($twitts);
+            $tweet.find('.' + tweet.user).text('@sharksforcheap');
+            $tweet.find('.tweet_time').text(tweet.created_at);
+            $tweet.find('.tweet_msg').text(tweet.message);
+            $tweet.appendTo($twitts);
             index -= 1;
           }
           
@@ -78,16 +81,16 @@
           while (index >= 0) {
             var tweet = streams.users.mracus[index]
             var $tweet = $('<div class="tweet_content"><div class="' + tweet.user + '"></div><span class="tweet_time"></span><div class="tweet_msg"></div></div>');
-    $tweet.find('.' + tweet.user).text('@mracus');
-    $tweet.find('.tweet_time').text(tweet.created_at);
-    $tweet.find('.tweet_msg').text(tweet.message);
-
-            $tweet.prependTo($twitts);
+            $tweet.find('.' + tweet.user).text('@mracus');
+            $tweet.find('.tweet_time').text(tweet.created_at);
+            $tweet.find('.tweet_msg').text(tweet.message);
+            $tweet.appendTo($twitts);
             index -= 1;
           }
           
         });
 
+          
 
 
        $(document).on('click','.douglascalhoun', function(){
@@ -97,15 +100,26 @@
           while (index >= 0) {
             var tweet = streams.users.douglascalhoun[index]
             var $tweet = $('<div class="tweet_content"><div class="' + tweet.user + '"></div><span class="tweet_time"></span><div class="tweet_msg"></div></div>');
-    $tweet.find('.' + tweet.user).text('@douglascalhoun');
-    $tweet.find('.tweet_time').text(tweet.created_at);
-    $tweet.find('.tweet_msg').text(tweet.message);
-
+            $tweet.find('.' + tweet.user).text('@douglascalhoun');
+            $tweet.find('.tweet_time').text(tweet.created_at);
+            $tweet.find('.tweet_msg').text(tweet.message);
             $tweet.prependTo($twitts);
             index -= 1;
           }
           
         });
+
+/*
+================================================================
+Function to restart stream
+================================================================
+*/       
+
+       $(document).on('click','.btn',function(){
+        tweetGenerator();
+        timer = setInterval(tweetGenerator,5000);
+       })
+
 
         
       });
